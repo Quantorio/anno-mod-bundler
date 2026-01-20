@@ -5,6 +5,9 @@ Contributions are welcome
 > This was only tested for Anno 1800 mods.
 > But it should also work for Anno 117.
 
+> [!NOTE]
+> Added simple support for 117. Mod structure and location files will be changed according to the version. For more information see the corresponding push-message.
+
 ## Motivation
 Say you have a mod structure like following just with many more assets:
 > South America:  
@@ -60,6 +63,7 @@ python build.py [-a] [-t] [-s] [-f] [PATH]
 |Arguments|Description|
 |---------|-----------|
 |PATH | must be a path to data directory or similar|
+|-v   <1800 or 117>| version|
 |-a   | bundle only asset|
 |-t   | bundle only translation|
 |-s   | mostly silent|
@@ -83,6 +87,7 @@ If this preamble is not found, `-f` can override the safeguard and the file gets
 - Bundling of mods into one mod
 - Feature for a `dist` folder into which the resources are copied and the finished bundled definitions are written
 - automatically zipping
+- smarter conversion between 117 and 1800
 
 As soon as you have an idea or feature, please create a issue immediately or even write it into this readme(if possible, I don't know).  
 You are welcome to use the tool and modify it as you wish, although it would be amazing if you could then contribute your changes so that everyone can benefit from them.
