@@ -72,6 +72,8 @@ if m&1<<2==0: print("\n")
 if "data" in [i.name for i in walk_dir.iterdir()]:
     rootdir=walk_dir
 else:
+    print("Ehm I did not found the data directory so easily.")
+    print("I try to search for it.")
     def rec(wd):
         a=wd.iterdir()
         if sum(1 for _ in a)==1:
@@ -86,7 +88,7 @@ else:
         a=wd.name
         if a=="data":return wd.parent
         elif wd.parent.is_mount():return None
-        else: rec(wd.parent)
+        else: return rec2(wd.parent)
     b=rec2(walk_dir)
     if a!=None and b!=None:
         if m&1<<2==0:
@@ -146,6 +148,7 @@ else:
         print("Good bye")
         sys.exit(1)
     rootdir= a or b
+    print("Heh. Found it!")
 
 print("I may have to do some preparations\n")
 
@@ -245,7 +248,10 @@ with (walk_dir/"data"/"config"/"export"/"main"/"asset"/"assets.xml").open("a") a
     g.write("<!--You will lose data if this preamble is in this file and you changed something here-->\n")
     g.write("<ModOps>\n")
     for root, subdirs, files in rootdir.walk():
-        x=root.relative_to(walk_dir).parts
+        if len(root.parts)>len(walk_dir.parts):
+            x=root.relative_to(walk_dir).parts
+        else:
+            x=walk_dir.relative_to(root).parts
         if walk_dir!=root and len(x)>1 and x[1]=="config": continue
         for file in files:
             f = root/file
